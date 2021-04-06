@@ -20,19 +20,34 @@ function camelCaseWords(words) {
 
 function getTotalSubjects(people) {
   if (people === undefined) throw new Error("people is required");
-  // Your code here!
+  let subjects = 0;
+  people.forEach((person) => {
+    if (person.subjects !== []) subjects += person.subjects.length;
+  });
+  return subjects;
 }
 
 function checkIngredients(menu, ingredient) {
   if (menu === undefined) throw new Error("menu is required");
   if (!ingredient) throw new Error("ingredient is required");
-  // Your code here!
+  for (let i = 0; i < menu.length; i++) {
+    for (let j = 0; j < menu[i].ingredients.length; j++) {
+      if (menu[i].ingredients[j] === ingredient) return true;
+    }
+  }
+  return false;
 }
 
 function duplicateNumbers(arr1, arr2) {
   if (arr1 === undefined) throw new Error("arr1 is required");
   if (arr2 === undefined) throw new Error("arr2 is required");
-  // Your code here!
+  let duplicatedNumbers = [];
+  arr1.forEach((elementArr1) => {
+    let number = arr2.find((elementArr2) => elementArr1 == elementArr2);
+    if (number) duplicatedNumbers.push(number);
+  });
+  duplicatedNumbers = [...new Set(duplicatedNumbers)];
+  return duplicatedNumbers.sort((a, b) => a - b);
 }
 
 module.exports = {
