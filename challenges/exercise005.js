@@ -1,25 +1,31 @@
 const findNextNumber = (nums, n) => {
   if (nums === undefined) throw new Error("nums is required");
   if (n === undefined) throw new Error("n is required");
-  // Your code here!
+  let numIndex = nums.indexOf(n);
+  return numIndex === -1 || numIndex === nums.length - 1
+    ? null
+    : nums[numIndex + 1];
 };
 
-const count1sand0s = str => {
+const count1sand0s = (str) => {
   if (str === undefined) throw new Error("str is required");
-  // Your code here!
+  let arr = str.split("");
+  let zeros = (ones = 0);
+  arr.forEach((num) => (num == 0 ? zeros++ : ones++));
+  return { 1: ones, 0: zeros };
 };
 
-const reverseNumber = n => {
+const reverseNumber = (n) => {
   if (n === undefined) throw new Error("n is required");
-  // Your code here!
+  //CHECK
 };
 
-const sumArrays = arrs => {
+const sumArrays = (arrs) => {
   if (arrs === undefined) throw new Error("arrs is required");
   // Your code here!
 };
 
-const arrShift = arr => {
+const arrShift = (arr) => {
   if (arr === undefined) throw new Error("arr is required");
   // Your code here!
 };
@@ -30,7 +36,7 @@ const findNeedle = (haystack, searchTerm) => {
   // Your code here!
 };
 
-const getWordFrequencies = str => {
+const getWordFrequencies = (str) => {
   if (str === undefined) throw new Error("str is required");
   // Your code here!
 };
@@ -42,5 +48,5 @@ module.exports = {
   sumArrays,
   arrShift,
   findNeedle,
-  getWordFrequencies
+  getWordFrequencies,
 };
