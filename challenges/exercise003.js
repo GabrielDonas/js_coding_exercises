@@ -1,11 +1,21 @@
 function getSquares(nums) {
   if (nums === undefined) throw new Error("nums is required");
-  // Your code here!
+  let squares = [];
+  nums.forEach((number) => squares.push(number * number));
+  return squares;
 }
 
 function camelCaseWords(words) {
   if (words === undefined) throw new Error("words is required");
-  // Your code here!
+  let camelCasedArr = [];
+  for (let i = 0; i < words.length; i++) {
+    if (i == 0) {
+      camelCasedArr.push(words[i]);
+    } else {
+      camelCasedArr.push(words[i].charAt(0).toUpperCase() + words[i].slice(1));
+    }
+  }
+  return camelCasedArr.join("");
 }
 
 function getTotalSubjects(people) {
@@ -30,5 +40,5 @@ module.exports = {
   camelCaseWords,
   getTotalSubjects,
   checkIngredients,
-  duplicateNumbers
+  duplicateNumbers,
 };
