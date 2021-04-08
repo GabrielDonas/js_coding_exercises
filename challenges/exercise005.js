@@ -50,27 +50,16 @@ const getWordFrequencies = (str) => {
   if (str === undefined) throw new Error("str is required");
   let arr = str.split(" ");
   let newArr = [];
+  let wordsObj = {};
   //clean words and insert them into the new array as key-value pairs
   for (let i = 0; i < arr.length; i++) {
     let word = arr[i].toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-    newArr.push([word, 1]);
+    newArr.push(word);
   }
-
-  //turn the key-value pairs array into an Object
-  let entries = new Map(newArr);
-  let wordsObj = Object.fromEntries(entries);
-
-  //console.log(wordsObjKeys);
-  let wordsObjKeys = Object.keys(wordsObj);
-  for (let j = 0; j < wordsObjKeys.length; j++) {
-    for (let x = 0; x < newArr.length; x++) {
-      if (wordsObjKeys[j] === newArr[x][0]) {
-        //console.log(wordsObj[0]);
-        //wordsObj[j]++;
-      }
-    }
-  }
-  console.log(wordsObj[0]);
+  //populate the new object
+  newArr.forEach((x) => {
+    wordsObj[x] = (wordsObj[x] || 0) + 1;
+  });
   return wordsObj;
 };
 
