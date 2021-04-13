@@ -213,3 +213,39 @@ describe("getScreentimeAlertList", () => {
     expect(getScreentimeAlertList([], "2019-06-14")).toEqual([]);
   });
 });
+
+describe("hexToRGB", () => {
+  test("it throws an error if not passed a string", () => {
+    expect(() => {
+      hexToRGB();
+    }).toThrow("hexStr is required");
+
+    expect(() => {
+      hexToRGB(360);
+    }).toThrow("hexStr is required");
+  });
+
+  test("it throws an error if not passed a hexadecimal color code", () => {
+    expect(() => {
+      hexToRGB("foo");
+    }).toThrow("hexadecimal color code required");
+
+    expect(() => {
+      hexToRGB("#FF");
+    }).toThrow("hexadecimal color code required");
+  });
+
+  test("should transform the hex code into an RGB code", () => {
+    expect(hexToRGB("#FF1133")).toBe("rgb(255,17,51)");
+    expect(hexToRGB("#FF0000")).toBe("rgb(255,0,0)");
+    expect(hexToRGB("#DAADCB")).toBe("rgb(218,173,203)");
+    expect(hexToRGB("#65EC68")).toBe("rgb(101,236,104)");
+    expect(hexToRGB("#C8FFFF")).toBe("rgb(200,255,255)");
+  });
+
+  test("should not be case sensitive", () => {
+    expect(hexToRGB("#619a6a")).toBe("rgb(97,154,106)");
+    expect(hexToRGB("#fe009f")).toBe("rgb(254,0,159)");
+    expect(hexToRGB("#ffffff")).toBe("rgb(255,255,255)");
+  });
+});
