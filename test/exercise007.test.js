@@ -34,3 +34,29 @@ describe("sumDigits", () => {
     expect(sumDigits(800026)).toBe(16);
   });
 });
+
+describe("createRange", () => {
+  test("it throws an error if not passed a start", () => {
+    expect(() => {
+      createRange();
+    }).toThrow("start is required");
+  });
+
+  test("it throws an error if not passed a end", () => {
+    expect(() => {
+      createRange(0);
+    }).toThrow("end is required");
+  });
+
+  test("it creates a range of numbers as an array", () => {
+    expect(createRange(3, 11, 2)).toEqual([3, 5, 7, 9, 11]);
+    expect(createRange(5, 30, 5)).toEqual([5, 10, 15, 20, 25, 30]);
+    expect(createRange(10, 50, 10)).toEqual([10, 20, 30, 40, 50]);
+  });
+
+  test("If step is not provided, assume the step is 1", () => {
+    expect(createRange(3, 11)).toEqual([3, 4, 5, 6, 7, 8, 9, 10, 11]);
+    expect(createRange(1, 5)).toEqual([1, 2, 3, 4, 5]);
+    expect(createRange(406, 412)).toEqual([406, 407, 408, 409, 410, 411, 412]);
+  });
+});
