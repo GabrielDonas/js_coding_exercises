@@ -99,7 +99,7 @@ const hexToRGB = (hexStr) => {
   for (let i = 1; i < hexArr.length; i += 2) {
     rgbArr.push(parseInt(hexArr[i] + hexArr[i + 1], 16));
   }
-  return `rgb(${rgbArr[0]},${rgbArr[1]},${rgbArr[2]})`;
+  return `rgb(${rgbArr.join()})`;
 };
 
 /**
@@ -113,7 +113,31 @@ const hexToRGB = (hexStr) => {
  * @param {Array} board
  */
 const findWinner = (board) => {
-  if (board === undefined) throw new Error("board is required");
+  if (!Array.isArray(board)) throw new Error("board is required");
+  if (board.length !== 3) throw new Error("3 * 3 board is required");
+  let winner = null;
+
+  const checkWin = (arr) => {
+    if (arr.every((e) => e === arr[0])) winner = arr[0];
+  };
+
+  for (let i = 0; i < board.length; i++) {
+    let column = [];
+    let row = board[i];
+    let diagonalLR = [];
+    let diagonalRL = [];
+
+    for (let j = 0; j < board[i].length; j++) {
+      column.push(board[j][i]);
+      diagonalLR.push(board[j][j]);
+      diagonalRL.push(board[j][i - j]);
+    }
+    checkWin(row);
+    checkWin(column);
+    checkWin(diagonalLR);
+    checkWin(diagonalRL);
+  }
+  return winner;
 };
 
 module.exports = {

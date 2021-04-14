@@ -249,3 +249,119 @@ describe("hexToRGB", () => {
     expect(hexToRGB("#ffffff")).toBe("rgb(255,255,255)");
   });
 });
+
+describe("findWinner", () => {
+  test("it throws an error if not passed an array", () => {
+    expect(() => {
+      findWinner("foo");
+    }).toThrow("board is required");
+
+    expect(() => {
+      findWinner(360);
+    }).toThrow("board is required");
+  });
+
+  test("it throws an error if not passed a 3 * 3 array", () => {
+    expect(() => {
+      findWinner([]);
+    }).toThrow("3 * 3 board is required");
+
+    expect(() => {
+      findWinner([[], []]);
+    }).toThrow("3 * 3 board is required");
+  });
+
+  test("return the player that has completed an entire row", () => {
+    const board = [
+      ["X", "X", "X"],
+      [null, null, "0"],
+      ["0", null, "0"],
+    ];
+
+    const board2 = [
+      ["X", null, "X"],
+      ["0", "0", "0"],
+      ["X", null, null],
+    ];
+
+    const board3 = [
+      ["X", "X", null],
+      ["X", "X", "0"],
+      ["0", "0", "0"],
+    ];
+    expect(findWinner(board)).toEqual("X");
+    expect(findWinner(board2)).toEqual("0");
+    expect(findWinner(board3)).toEqual("0");
+  });
+
+  test("return the player that has completed an entire column", () => {
+    const board = [
+      ["X", "X", "0"],
+      ["X", null, "0"],
+      ["0", null, "0"],
+    ];
+
+    const board2 = [
+      [null, "X", "X"],
+      ["0", "X", "0"],
+      ["0", "X", null],
+    ];
+
+    const board3 = [
+      ["X", "0", null],
+      ["X", "0", "0"],
+      ["X", null, null],
+    ];
+    expect(findWinner(board)).toEqual("0");
+    expect(findWinner(board2)).toEqual("X");
+    expect(findWinner(board3)).toEqual("X");
+  });
+
+  test("return the player that has completed a diagonal line", () => {
+    const board = [
+      ["X", "X", "0"],
+      ["X", "0", null],
+      ["0", null, "0"],
+    ];
+
+    const board2 = [
+      ["X", "X", null],
+      ["0", "X", "0"],
+      [null, "0", "X"],
+    ];
+
+    const board3 = [
+      ["X", "X", "0"],
+      [null, "0", "0"],
+      ["0", "0", "X"],
+    ];
+
+    expect(findWinner(board)).toEqual("0");
+    expect(findWinner(board2)).toEqual("X");
+    expect(findWinner(board3)).toEqual("0");
+  });
+
+  test("return null if it's a draw", () => {
+    const board = [
+      ["X", "X", "0"],
+      ["X", "0", "X"],
+      [null, "X", "0"],
+    ];
+
+    const board2 = [
+      ["X", "X", null],
+      ["0", "X", "0"],
+      [null, "0", "0"],
+    ];
+
+    const board3 = [
+      ["X", "X", "0"],
+      [null, "0", "0"],
+      ["X", "0", "X"],
+    ];
+
+    expect(findWinner(board)).toEqual(null);
+    expect(findWinner(board2)).toEqual(null);
+    expect(findWinner(board3)).toEqual(null);
+  });
+});
