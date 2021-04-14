@@ -10,16 +10,15 @@ const findNextNumber = (nums, n) => {
 const count1sand0s = (str) => {
   if (str === undefined) throw new Error("str is required");
   let arr = str.split("");
-  let zeros = (ones = 0);
+  let zeros = 0;
+  let ones = 0;
   arr.forEach((num) => (num == 0 ? zeros++ : ones++));
   return { 1: ones, 0: zeros };
 };
 
 const reverseNumber = (n) => {
   if (n === undefined) throw new Error("n is required");
-  let nString = n.toString();
-  let nArrayReversed = nString.split("").reverse();
-  let nStringReversed = nArrayReversed.join("");
+  let nStringReversed = n.toString().split("").reverse().join("");
   return parseFloat(nStringReversed);
 };
 

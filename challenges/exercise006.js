@@ -116,7 +116,7 @@ const areWeCovered = (staff, day) => {
       if (staff[i].rota[j] === day) staffCount++;
     }
   }
-  return staffCount >= 3 ? true : false;
+  return staffCount >= 3;
 };
 
 module.exports = {
